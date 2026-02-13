@@ -34,5 +34,11 @@ def listGroups():
         "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"
     ])
 
-userAdd()
+# userAdd()
 
+def deleteUser():
+    name = str(input('name user now! >'))
+
+    cmd = ["sudo", "userdel", "-r", name]
+    subprocess.run(cmd)
+deleteUser()
