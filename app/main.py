@@ -7,7 +7,7 @@ def main():
 
     while True:
         try:
-            raw = str(input(' ~ $ ')).strip()
+            raw = str(input('usys ~ $ ')).strip()
         except KeyboardInterrupt:
             break
 

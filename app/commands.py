@@ -47,3 +47,10 @@ ALIASES = {
 
 # cloneuser (cu)
 
+# group:
+
+# chgroupname (cgn)
+
+
+# add flags
+
