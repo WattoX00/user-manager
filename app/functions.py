@@ -131,46 +131,12 @@ class Functions():
     # HELP function :)
     def helpText():
         print("""
-    USER MANAGEMENT CLI – HELP
-
-    COMMANDS
-    --------
-
-    adduser (au)
-        Create a new user.
-
-    deluser (du)
-        Delete an existing user.
-
-    passwd (pw)
-        Change a user's password.
-
-    appendgroup (ag)
-        Add a user to a group.
-
-    chname (cn)
-        Change the username.
-
-    chshell (cs)
-        Change the user's shell.
-
-    addgroup (ga)
-        Create a new group.
-
-    delgroup (gd)
-        Delete an existing group.
-
-    listuser (lu)
-        List all users.
-
-    listgroups (lg)
-        List all groups.
-
-    groupinfo (gi)
-        Show detailed information about a group.
-
-    homedir (hd)
-        Show the home directory of a user.
-
-       """)
+        Commands (alias):
+        adduser      (au)   deluser      (du)
+        passwd       (pw)   appendgroup  (ag)
+        chname       (cn)   chshell      (cs)
+        addgroup     (ga)   delgroup     (gd)
+        listuser     (lu)   listgroups   (lg)
+        groupinfo    (gi)   homedir      (hd)
+        """)
 
