@@ -59,3 +59,9 @@ ALIASES = {
 
 # add flags
 
+# add ssh
+# add samba
+# add github ssh setup
+# add apache setup
+# add errorhandling ; user permission managment ; foldere permissions
+

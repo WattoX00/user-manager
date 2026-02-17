@@ -1,4 +1,3 @@
-# add errorhandling samba setup ; user permission managment ; foldere permissions
 class Functions():
 
     def userName():
