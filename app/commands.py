@@ -13,6 +13,8 @@ COMMANDS = {
     "chshell": UserFunctions.changeShell,
     # group
     "addgroup": GroupFunctions.groupAdd,
+    "rmgroup": GroupFunctions.groupRemove,
+    "chgroup": GroupFunctions.chGroupName,
     "delgroup": GroupFunctions.groupDel,
     #list
     "listuser": HelpFunctions.listUsers,
@@ -30,6 +32,8 @@ ALIASES = {
     "cn": "chname",
     "cs": "chshell",
     "ga": "addgroup",
+    "gr": "rmgroup",
+    "cg": "chgroup",
     "gd": "delgroup",
     "lu": "listuser",
     "lg": "listgroups",
