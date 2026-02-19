@@ -10,6 +10,7 @@ USER_COMMANDS = {
     "chname": UserFunctions.changeName,
     "chshell": UserFunctions.changeShell,
     "listusers": HelpFunctions.listUsers,
+    "listusergroups": HelpFunctions.listUserGroups,
     "homedir": HelpFunctions.getHomeDir,
     "help": UserFunctions.helpText,
 }
@@ -22,6 +23,7 @@ USER_ALIASES = {
     "cn": "chname",
     "cs": "chshell",
     "lu": "listusers",
+    "lug": "listusergroups",
     "hd": "homedir",
     "h": "help",
 }
@@ -63,6 +65,9 @@ GROUP_ALIASES = {
 
 
 # add flags
+
+# better help commands (one short, one long)
+# exit all
 
 # add ssh
 # add samba

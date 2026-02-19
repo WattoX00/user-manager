@@ -8,6 +8,7 @@ class Functions():
     def groupName():
         HelpFunctions.listGroups()
         groupname = str(input('Group name: ')).lower().strip()
+        return groupname
 
     def executeCmd(cmd, check=True, capture=False):
         import subprocess
@@ -33,7 +34,7 @@ class HelpFunctions():
 
     def listGroupInfo():
         groupname = Functions.groupName()
-        cmd = ["getent", "group", groupname[0]]
+        cmd = ["getent", "group", groupname]
 
         print(Functions.executeCmd(cmd, capture=True).stdout)
 
