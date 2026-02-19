@@ -3,20 +3,44 @@ from group_cfg import GroupFunctions
 from user_cfg import UserFunctions
 from help_cfg import HelpFunctions
 
-COMMANDS = {
-    # user
+# --- USER COMMANDS ---
+USER_COMMANDS = {
     "adduser": UserFunctions.userAdd,
     "deluser": UserFunctions.deleteUser,
     "passwd": UserFunctions.userPassword,
     "appendgroup": UserFunctions.appendToGroup,
     "chname": UserFunctions.changeName,
     "chshell": UserFunctions.changeShell,
-    # group
+}
+
+USER_ALIASES = {
+    "au": "adduser",
+    "du": "deluser",
+    "pw": "passwd",
+    "ag": "appendgroup",
+    "cn": "chname",
+    "cs": "chshell",
+}
+
+
+# --- GROUP COMMANDS ---
+GROUP_COMMANDS = {
     "addgroup": GroupFunctions.groupAdd,
     "rmgroup": GroupFunctions.groupRemove,
     "chgroup": GroupFunctions.chGroupName,
     "delgroup": GroupFunctions.groupDel,
-    #list
+}
+
+GROUP_ALIASES = {
+    "ga": "addgroup",
+    "gr": "rmgroup",
+    "cg": "chgroup",
+    "gd": "delgroup",
+}
+
+
+# --- HELP COMMANDS ---
+HELP_COMMANDS = {
     "listuser": HelpFunctions.listUsers,
     "listgroups": HelpFunctions.listGroups,
     "groupinfo": HelpFunctions.listGroupInfo,
@@ -24,22 +48,20 @@ COMMANDS = {
     "help": HelpFunctions.helpText,
 }
 
-ALIASES = {
-    "au": "adduser",
-    "du": "deluser",
-    "pw": "passwd",
-    "ag": "appendgroup",
-    "cn": "chname",
-    "cs": "chshell",
-    "ga": "addgroup",
-    "gr": "rmgroup",
-    "cg": "chgroup",
-    "gd": "delgroup",
+HELP_ALIASES = {
     "lu": "listuser",
     "lg": "listgroups",
     "gi": "groupinfo",
     "hd": "homedir",
-    "h": "help"
+    "h": "help",
+}
+
+
+# --- MODE SWITCH TABLE ---
+COMMAND_SETS = {
+    "user": (USER_COMMANDS, USER_ALIASES),
+    "group": (GROUP_COMMANDS, GROUP_ALIASES),
+    "help": (HELP_COMMANDS, HELP_ALIASES),
 }
 
 # todo : 
