@@ -10,6 +10,7 @@ USER_COMMANDS = {
     "chname": UserFunctions.changeName,
     "chshell": UserFunctions.changeShell,
     "listusers": HelpFunctions.listUsers,
+    "homedir": HelpFunctions.getHomeDir,
     "help": UserFunctions.helpText,
 }
 
@@ -21,6 +22,7 @@ USER_ALIASES = {
     "cn": "chname",
     "cs": "chshell",
     "lu": "listusers",
+    "hd": "homedir",
     "h": "help",
 }
 
@@ -30,6 +32,7 @@ GROUP_COMMANDS = {
     "chgroup": GroupFunctions.chGroupName,
     "delgroup": GroupFunctions.groupDel,
     "listgroups": HelpFunctions.listGroups,
+    "groupinfo": HelpFunctions.listGroupInfo,
     "help": GroupFunctions.helpText,
 }
 
@@ -39,11 +42,11 @@ GROUP_ALIASES = {
     "cg": "chgroup",
     "gd": "delgroup",
     "lg": "listgroups",
+    "gi": "groupinfo",
     "h": "help",
 }
 
 
-# --- MODE SWITCH TABLE ---
 COMMAND_SETS = {
     "user": (USER_COMMANDS, USER_ALIASES),
     "group": (GROUP_COMMANDS, GROUP_ALIASES),
