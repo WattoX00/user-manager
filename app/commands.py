@@ -2,7 +2,6 @@ from functions import Functions, HelpFunctions
 from group_cfg import GroupFunctions
 from user_cfg import UserFunctions
 
-# --- USER COMMANDS ---
 USER_COMMANDS = {
     "adduser": UserFunctions.userAdd,
     "deluser": UserFunctions.deleteUser,
@@ -11,6 +10,7 @@ USER_COMMANDS = {
     "chname": UserFunctions.changeName,
     "chshell": UserFunctions.changeShell,
     "listusers": HelpFunctions.listUsers,
+    "help": UserFunctions.helpText,
 }
 
 USER_ALIASES = {
@@ -21,15 +21,16 @@ USER_ALIASES = {
     "cn": "chname",
     "cs": "chshell",
     "lu": "listusers",
+    "h": "help",
 }
 
-# --- GROUP COMMANDS ---
 GROUP_COMMANDS = {
     "addgroup": GroupFunctions.groupAdd,
     "rmgroup": GroupFunctions.groupRemove,
     "chgroup": GroupFunctions.chGroupName,
     "delgroup": GroupFunctions.groupDel,
     "listgroups": HelpFunctions.listGroups,
+    "help": GroupFunctions.helpText,
 }
 
 GROUP_ALIASES = {
@@ -37,7 +38,8 @@ GROUP_ALIASES = {
     "gr": "rmgroup",
     "cg": "chgroup",
     "gd": "delgroup",
-    "lg": "listgroups"
+    "lg": "listgroups",
+    "h": "help",
 }
 
 

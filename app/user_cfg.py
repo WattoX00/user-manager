@@ -67,3 +67,16 @@ class UserFunctions():
         cmd = ["sudo", "usermod", "-s", shellname, username]
 
         Functions.executeCmd(cmd)
+
+    # help text
+    def helpText():
+        print("""
+        Commands (alias):
+        adduser      (au)
+        deluser      (du)
+        passwd       (pw)
+        chname       (cn)
+        chshell      (cs)
+        listuser     (lu)
+        homedir      (hd)
+        """)

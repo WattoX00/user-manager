@@ -31,3 +31,12 @@ class GroupFunctions():
 
         Functions.executeCmd(cmd)
 
+    def helpText():
+        print("""
+        Commands    (alias):
+        appendgroup  (ag)
+        addgroup     (ga)
+        delgroup     (gd)
+        listgroups   (lg)
+        groupinfo    (gi)
+        """)
