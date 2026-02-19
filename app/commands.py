@@ -52,8 +52,7 @@ COMMAND_SETS = {
     "group": (GROUP_COMMANDS, GROUP_ALIASES),
 }
 
-# todo : 
-# dividee the app into segments
+# todo :
 
 # lock/unlock user: usermod -L username ; usermod -U username
 
