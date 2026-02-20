@@ -47,6 +47,16 @@ GROUP_ALIASES = {
     "gi": "groupinfo",
     "h": "help",
 }
+    
+def root_help():
+    print("""
+    Command     Alias   Description
+
+    user        (u)     User management commands
+    group       (g)     Group management commands
+    help        (h)     Show this help menu
+    exit        (q)     Exit the program
+    """)
 
 
 # todo :
@@ -66,7 +76,6 @@ GROUP_ALIASES = {
 
 # add flags
 
-# better help commands (one short, one long)
 # exit all
 
 # add ssh
@@ -74,4 +83,3 @@ GROUP_ALIASES = {
 # add github ssh setup
 # add apache setup
 # add errorhandling ; user permission managment ; foldere permissions
-
