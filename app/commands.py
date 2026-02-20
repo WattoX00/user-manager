@@ -88,9 +88,7 @@ def helpFull():
     GENERAL
 
     quit        (q)   - Exit the program
-
-
-""")
+    """)
 
 # todo :
 
@@ -106,10 +104,7 @@ def helpFull():
 
 # cloneuser (cu)
 
-
 # add flags
-
-# exit all
 
 # add ssh
 # add samba

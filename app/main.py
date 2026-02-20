@@ -12,7 +12,7 @@ def main():
         if not raw:
             continue
 
-        if raw == "exit":
+        if raw == 'exit' or raw == 'q':
             break
 
         if raw == 'help' or raw == 'h':
