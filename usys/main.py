@@ -32,5 +32,3 @@ def main():
             continue
 
         print(f"{raw}: command not found")
-
-main()
