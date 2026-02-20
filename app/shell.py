@@ -1,36 +1,25 @@
-from shell import run_shell
-from commands import USER_COMMANDS, USER_ALIASES, GROUP_COMMANDS, GROUP_ALIASES, root_help, helpFull
+def run_shell(prompt, commands, aliases):
 
-def main():
     while True:
         try:
-            raw = input('usys ~ $ ').strip().lower()
+            raw = input(prompt).strip().lower()
         except KeyboardInterrupt:
             print()
-            break
+            return
 
         if not raw:
             continue
 
-        if raw == 'exit' or raw == 'q':
-            break
+        if raw == 'exit' or raw == 'e':
+            return
 
-        if raw == 'help' or raw == 'h':
-            root_help()
-            continue
-        
-        if raw == 'helpf' or raw == 'f':
-            helpFull()
-            continue
-        
-        if raw == 'user' or raw == 'u':
-            run_shell('usys user ~ $ ', USER_COMMANDS, USER_ALIASES)
+        command = aliases.get(raw, raw)
+        func = commands.get(command)
+
+
+
+        if not func:
+            print(f"{command}: command not found")
             continue
 
-        if raw == 'group' or raw == 'g':
-            run_shell('usys group ~ $ ', GROUP_COMMANDS, GROUP_ALIASES)
-            continue
-
-        print(f'{raw}: command not found')
-
-main()
+        func()
