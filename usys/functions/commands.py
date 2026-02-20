@@ -1,6 +1,6 @@
-from functions.group_cfg import GroupFunctions
-from functions.user_cfg import UserFunctions
-from functions.functions import HelpFunctions
+from .group_cfg import GroupFunctions
+from .user_cfg import UserFunctions
+from .functions import HelpFunctions
 
 USER_COMMANDS = {
     "adduser": UserFunctions.userAdd,
