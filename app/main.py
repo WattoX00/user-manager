@@ -1,5 +1,5 @@
 from shell import run_shell
-from commands import USER_COMMANDS, USER_ALIASES, GROUP_COMMANDS, GROUP_ALIASES, root_help
+from commands import USER_COMMANDS, USER_ALIASES, GROUP_COMMANDS, GROUP_ALIASES, root_help, helpFull
 
 def main():
     while True:
@@ -17,6 +17,10 @@ def main():
 
         if raw == 'help' or raw == 'h':
             root_help()
+            continue
+
+        if raw == 'helpf' or raw == 'f':
+            helpFull()
             continue
 
         if raw == 'user' or raw == 'u':
