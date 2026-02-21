@@ -59,7 +59,7 @@ GROUP_COMMANDS = {
     "chgid": GroupFunctions.changeGroupId,
     "groupinfo": HelpFunctions.listGroupInfo,
     "help": GroupFunctions.helpText,
-    "helpf": UserFunctions.fullHelp,
+    "helpf": GroupFunctions.fullHelp,
     "quit": quit,
 }
 

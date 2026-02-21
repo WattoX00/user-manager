@@ -101,7 +101,6 @@ class UserFunctions():
         Functions.executeCmd(cmd)
 
     def changeUserId():
-        usermod -u new_uid username
         username = Functions.userName()
         newid = int(input('New UID: '))
         cmd = ["sudo", "usermod", "-u", newid, username]

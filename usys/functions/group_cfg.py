@@ -51,7 +51,7 @@ class GroupFunctions():
     quit          (q)     Quit the program
     """)
 
-    def fulHelp():
+    def fullHelp():
         print("""
     Command       Alias   Description
 
