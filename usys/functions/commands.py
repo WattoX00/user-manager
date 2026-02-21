@@ -9,10 +9,16 @@ USER_COMMANDS = {
     "appendgroup": UserFunctions.appendToGroup,
     "chname": UserFunctions.changeName,
     "chshell": UserFunctions.changeShell,
+    "lockuser": UserFunctions.lockUser,
+    "unlockuser": UserFunctions.unlockUser,
+    "setexp": UserFunctions.setExp,
+    "rmexp": UserFunctions.removeExp,
     "listusers": HelpFunctions.listUsers,
     "listusergroups": HelpFunctions.listUserGroups,
     "homedir": HelpFunctions.getHomeDir,
     "passinfo": HelpFunctions.passInfo,
+    "userlocked": HelpFunctions.userLocked,
+    "userexpday": HelpFunctions.userExpDay,
     "help": UserFunctions.helpText,
     "quit": quit,
 }
@@ -24,10 +30,16 @@ USER_ALIASES = {
     "ag": "appendgroup",
     "cn": "chname",
     "cs": "chshell",
+    "luu": "lockuser",
+    "ulu": "unlockuser",
+    "se": "setexp",
+    "re": "rmexp",
     "lu": "listusers",
     "lug": "listusergroups",
     "hd": "homedir",
     "pi": "passinfo",
+    "ul": "userlocked",
+    "ued": "userexpday",
     "h": "help",
     "q": "quit",
 }
@@ -93,10 +105,6 @@ def helpFull():
     """)
 
 # todo :
-
-# lock/unlock user: usermod -L username ; usermod -U username
-
-# set expire: expireuser (eu) ; setexpiry  (se)
 
 # passinfo (pi) ; setpasspolicy (sp)
 

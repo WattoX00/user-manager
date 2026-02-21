@@ -41,13 +41,13 @@ class HelpFunctions():
         print(Functions.executeCmd(cmd, capture=True).stdout)
 
     def userExpDay():
-        result = Functions.executeCmd(["bash", "-c", "chage -l username | grep 'Account expires'"], capture=True)
+        username = Functions.userName()
+        result = Functions.executeCmd(["bash", "-c", f"chage -l {username} | grep 'Account expires'"], capture=True)
         print(result.stdout)
 
     def listGroups():
         result = Functions.executeCmd(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"], capture=True)
         print(result.stdout)
-
 
     def listGroupInfo():
         groupname = Functions.groupName()
