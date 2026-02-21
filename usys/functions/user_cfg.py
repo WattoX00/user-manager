@@ -53,7 +53,11 @@ class UserFunctions():
         Functions.executeCmd(cmd)
 
     def removeFromGroup():
-        pass
+        username = Functions.userName()
+        groupname = Functions.groupName()
+        cmd = ["sudo", "gpasswd", username, groupname]
+
+        Functions.executeCmd(cmd)
 
     # Change name
     def changeName():
@@ -73,26 +77,26 @@ class UserFunctions():
 
     def lockUser():
         username = Functions.userName()
-        cmd = ["usermod", "-L", username]
+        cmd = ["sudo", "usermod", "-L", username]
 
         Functions.executeCmd(cmd)
 
     def unlockUser():
         username = Functions.userName()
-        cmd = ["usermod", "-U", username]
+        cmd = ["sudo", "usermod", "-U", username]
 
         Functions.executeCmd(cmd)
 
     def setExp():
         username = Functions.userName()
         date = str(input('Exp day')) # YYYY-MM-DD
-        cmd = ["chage", "-E", date, username]
+        cmd = ["sudo", "chage", "-E", date, username]
 
         Functions.executeCmd(cmd)
 
     def removeExp():
         username = Functions.userName()
-        cmd = ["chage", "-1", username]
+        cmd = ["sudo", "chage", "-1", username]
 
         Functions.executeCmd(cmd)
 

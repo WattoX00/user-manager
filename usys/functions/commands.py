@@ -106,9 +106,7 @@ def helpFull():
 
 # todo :
 
-# passinfo (pi) ; setpasspolicy (sp)
-
-# addusertogroup (aug) ; removeusergroup  (rug) ; setgroups (sg)
+# setpasspolicy (sp)
 
 # chuid (cuid) ; chgid (cgid)
 
