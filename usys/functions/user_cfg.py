@@ -68,6 +68,21 @@ class UserFunctions():
 
         Functions.executeCmd(cmd)
 
+    def lockUser():
+        pass
+
+    def unlockUser():
+        pass
+
+    def setExp():
+        pass
+
+    def removeExp():
+        pass
+
+    def passExp():
+        pass
+
     # help text
     def helpText():
         print("""

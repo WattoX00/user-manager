@@ -21,9 +21,8 @@ class HelpFunctions():
         result = Functions.executeCmd(["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"], capture=True)
         print(result.stdout)
 
-    def listGroups():
-        result = Functions.executeCmd(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"], capture=True)
-        print(result.stdout)
+    def passInfo():
+        pass
 
     def getHomeDir():
         username = Functions.userName()
@@ -31,6 +30,11 @@ class HelpFunctions():
 
         home = result.stdout.split(":")[5]
         print(home)
+
+    def listGroups():
+        result = Functions.executeCmd(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"], capture=True)
+        print(result.stdout)
+
 
     def listGroupInfo():
         groupname = Functions.groupName()
@@ -43,10 +47,4 @@ class HelpFunctions():
         cmd = ["groups", username]
 
         print(Functions.executeCmd(cmd, capture=True).stdout)
-
-    # Helpers
-    def groupName():
-        Functions.listGroups()
-        groupname = str(input('Group name separated by space: ')).lower().strip()
-        return groupname.split(' ')
 
