@@ -42,6 +42,7 @@ class Functions():
     @staticmethod
     def executeCmd(cmd, check=True, capture=False):
         import subprocess
+
         try:
             result = subprocess.run(
                 cmd,
@@ -50,11 +51,22 @@ class Functions():
                 text=True
             )
             return result
+
         except subprocess.CalledProcessError as e:
-            print(f"\n[ERROR] Command failed: {' '.join(cmd)}")
-            print(e.stderr if e.stderr else e)
+            print(f"\n[COMMAND FAILED]")
+            print(f"Command: {' '.join(cmd)}")
+            print(f"Exit Code: {e.returncode}")
+            if e.stderr:
+                print(f"Error Output: {e.stderr.strip()}")
+            return None
+
+        except FileNotFoundError:
+            print(f"\n[ERROR] Command not found: {cmd[0]}")
+            return None
+
         except Exception as e:
             print(f"\n[UNEXPECTED ERROR] {e}")
+            return None
 
 class HelpFunctions():
 
