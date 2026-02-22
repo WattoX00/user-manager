@@ -73,7 +73,8 @@ class HelpFunctions():
     #listings
     def listUsers():
         result = Functions.executeCmd(["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"], capture=True)
-        print(result.stdout)
+        if result and result.stdout:
+            print(result.stdout)
 
     def passInfo():
         username = Functions.userName()
@@ -97,11 +98,13 @@ class HelpFunctions():
     def userExpDay():
         username = Functions.userName()
         result = Functions.executeCmd(["bash", "-c", f"chage -l {username} | grep 'Account expires'"], capture=True)
-        print(result.stdout)
+        if result and result.stdout:
+            print(result.stdout)
 
     def listGroups():
         result = Functions.executeCmd(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"], capture=True)
-        print(result.stdout)
+        if result and result.stdout:
+            print(result.stdout)
 
     def listGroupInfo():
         groupname = Functions.groupName()
