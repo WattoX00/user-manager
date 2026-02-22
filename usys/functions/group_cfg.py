@@ -1,8 +1,8 @@
-from .functions import Functions
+from .functions import Functions, HelpFunctions
 
-class GroupFunctions():
-    # GROUPS
- 
+class GroupFunctions:
+
+    @staticmethod
     def groupAdd():
         groupnames = Functions.groupName(must_exist=False)
 
@@ -17,30 +17,31 @@ class GroupFunctions():
             if result:
                 print(f"Group '{groupname}' created successfully.")
 
+    @staticmethod
     def groupRemove():
         username = Functions.userName()
-        groupnames = Functions.groupName()
+        groupnames = Functions.groupName(must_exist=True)
 
         if not groupnames:
             print("No valid groups selected.")
             return
 
-        groups = ",".join(groupnames)
+        for groupname in groupnames:
+            cmd = ["sudo", "gpasswd", "-d", username, groupname]
+            result = Functions.executeCmd(cmd)
 
-        cmd = ["sudo", "usermod", "-rG", groups, username]
-        result = Functions.executeCmd(cmd)
+            if result:
+                print(f"Removed '{username}' from group '{groupname}'.")
 
-        if result:
-            print(f"Removed {groups} from {username}.")
-
+    @staticmethod
     def chGroupName():
-        groupnames = Functions.groupName()
+        groupnames = Functions.groupName(must_exist=True)
 
         if not groupnames:
             print("No valid group selected.")
             return
 
-        groupname = groupnames[0]  # Only rename one group
+        groupname = groupnames[0]
 
         newgroup = input("New name of the group: ").strip().lower()
 
@@ -58,8 +59,9 @@ class GroupFunctions():
         if result:
             print(f"Group '{groupname}' renamed to '{newgroup}'.")
 
+    @staticmethod
     def groupDel():
-        groupnames = Functions.groupName()
+        groupnames = Functions.groupName(must_exist=True)
 
         if not groupnames:
             print("No valid group selected.")
@@ -72,8 +74,9 @@ class GroupFunctions():
             if result:
                 print(f"Group '{groupname}' deleted.")
 
+    @staticmethod
     def changeGroupId():
-        groupnames = Functions.groupName()
+        groupnames = Functions.groupName(must_exist=True)
 
         if not groupnames:
             print("No valid group selected.")
@@ -87,7 +90,7 @@ class GroupFunctions():
             print("Invalid GID. Must be a number.")
             return
 
-        if HelpFunctions.uidExists(newid):
+        if HelpFunctions.gidExists(newid):
             print("That GID is already in use.")
             return
 
