@@ -20,10 +20,24 @@ class Functions():
 
             return username
 
+    @staticmethod
     def groupName():
         HelpFunctions.listGroups()
-        groupname = str(input('Group name: ')).lower().strip()
-        return groupname
+        group_input = input('Group name(s) (comma separated): ').strip().lower()
+
+        if not group_input:
+            return []
+
+        groups = [g.strip() for g in group_input.split(",") if g.strip()]
+
+        valid_groups = []
+        for g in groups:
+            if HelpFunctions.groupExists(g):
+                valid_groups.append(g)
+            else:
+                print(f"Group '{g}' does not exist.")
+
+        return valid_groups
 
     @staticmethod
     def executeCmd(cmd, check=True, capture=False):
