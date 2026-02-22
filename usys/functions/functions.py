@@ -131,6 +131,13 @@ class HelpFunctions:
                     print(line.strip())
 
     @staticmethod
+    def idUser():
+        username = Functions.userName()
+        result = Functions.executeCmd(["id", username], capture=True)
+        if result and result.stdout:
+            print(result.stdout.strip())
+
+    @staticmethod
     def listGroups():
         result = Functions.executeCmd(
             ["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"],
