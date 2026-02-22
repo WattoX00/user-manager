@@ -89,7 +89,7 @@ class HelpFunctions:
     @staticmethod
     def passInfo():
         username = Functions.userName()
-        cmd = ["chage", "-l", username]
+        cmd = ["sudo", "chage", "-l", username]
 
         result = Functions.executeCmd(cmd, capture=True)
         if result and result.stdout:
@@ -111,7 +111,7 @@ class HelpFunctions:
     @staticmethod
     def userLocked():
         username = Functions.userName()
-        cmd = ["passwd", "-S", username]
+        cmd = ["sudo", "passwd", "-S", username]
 
         result = Functions.executeCmd(cmd, capture=True)
         if result and result.stdout:
@@ -121,7 +121,7 @@ class HelpFunctions:
     def userExpDay():
         username = Functions.userName()
         result = Functions.executeCmd(
-            ["chage", "-l", username],
+            ["sudo", "chage", "-l", username],
             capture=True
         )
 

@@ -116,6 +116,8 @@ def helpFull():
 
 # todo :
 
+# full prints id usere etc...
+
 # add flags
 
 # add ssh
