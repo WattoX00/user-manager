@@ -4,32 +4,73 @@ class GroupFunctions():
     # GROUPS
  
     def groupAdd():
-        groupname = Functions.groupName()
-        cmd = ["sudo", "groupadd", groupname]
+        groupnames = Functions.groupName()
 
-        Functions.executeCmd(cmd)
+        if not groupnames:
+            print("No valid group names provided.")
+            return
+
+        for groupname in groupnames:
+            cmd = ["sudo", "groupadd", groupname]
+            result = Functions.executeCmd(cmd)
+
+            if result:
+                print(f"Group '{groupname}' created successfully.")
 
     def groupRemove():
         username = Functions.userName()
-        groupName = Functions.groupName()
+        groupnames = Functions.groupName()
 
-        groups = ','.join(groupName)
+        if not groupnames:
+            print("No valid groups selected.")
+            return
+
+        groups = ",".join(groupnames)
+
         cmd = ["sudo", "usermod", "-rG", groups, username]
+        result = Functions.executeCmd(cmd)
 
-        Functions.executeCmd(cmd)
+    if result:
+        print(f"Removed {groups} from {username}.")
 
     def chGroupName():
-        groupname = Functions.groupName()
-        newgroup = str(input('New name of the group: '))
-        cmd = ["sudo", "groupmod", "-n", newgroup, groupname]
+        groupnames = Functions.groupName()
 
-        Functions.executeCmd(cmd)
+        if not groupnames:
+            print("No valid group selected.")
+            return
+
+        groupname = groupnames[0]  # Only rename one group
+
+        newgroup = input("New name of the group: ").strip().lower()
+
+        if not newgroup:
+            print("New group name cannot be empty.")
+            return
+
+        if HelpFunctions.groupExists(newgroup):
+            print("Group with that name already exists.")
+            return
+
+        cmd = ["sudo", "groupmod", "-n", newgroup, groupname]
+        result = Functions.executeCmd(cmd)
+
+        if result:
+            print(f"Group '{groupname}' renamed to '{newgroup}'.")
 
     def groupDel():
-        groupname = Functions.groupName()
-        cmd = ["sudo", "groupdel", groupname]
+        groupnames = Functions.groupName()
 
-        Functions.executeCmd(cmd)
+        if not groupnames:
+            print("No valid group selected.")
+            return
+
+        for groupname in groupnames:
+            cmd = ["sudo", "groupdel", groupname]
+            result = Functions.executeCmd(cmd)
+
+            if result:
+                print(f"Group '{groupname}' deleted.")
 
     def changeGroupId():
         groupname = Functions.groupName()
