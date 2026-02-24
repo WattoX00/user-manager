@@ -4,13 +4,15 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "usys"
-version = "0.1.1"
+version = "0.1.2"
 description = "Linux user manager"
 readme = "README.md"
 authors = [{ name="Wattox00"}]
 license = { text = "MIT" }
 requires-python = ">=3.8"
-dependencies = []
+dependencies = [
+    "prompt_toolkit>=3.0.52",
+]
 
 [project.scripts]
 usys = "usys.main:main"
