@@ -80,6 +80,14 @@ GROUP_ALIASES = {
     "q": "quit",
 }
 
+SSH_COMMANDS = {
+
+}
+
+SSH_ALIASES = {
+    
+}
+
 def root_help():
     print("""
     Command     Alias   Description
