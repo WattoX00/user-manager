@@ -1,26 +1,26 @@
 from .functions import Functions
 import os
-
+import shutil
 class SSHFunctions:
 
     @staticmethod
     def detectPackageManager():
-        managers = {
-            "apt": ["apt", "apt-get"],
-            "dnf": ["dnf"],
-            "yum": ["yum"],
-            "pacman": ["pacman"],
-            "zypper": ["zypper"],
-            "apk": ["apk"],
-            "xbps": ["xbps-install"],
-            "eopkg": ["eopkg"],
-            "emerge": ["emerge"],
-            "nix": ["nix-env"]
-        }
+        managers = [
+            ("apt", ["apt-get", "apt"]),
+            ("dnf", ["dnf"]),
+            ("yum", ["yum"]),
+            ("pacman", ["pacman"]),
+            ("zypper", ["zypper"]),
+            ("apk", ["apk"]),
+            ("xbps", ["xbps-install"]),
+            ("eopkg", ["eopkg"]),
+            ("emerge", ["emerge"]),
+            ("nix", ["nix-env"])
+        ]
 
-        for manager, cmds in managers.items():
-            for cmd in cmds:
-                if Functions.executeCmd(["which", cmd], check=False, capture=True):
+        for manager, binaries in managers:
+            for binary in binaries:
+                if shutil.which(binary):
                     return manager
 
         return None
@@ -34,19 +34,24 @@ class SSHFunctions:
             return
 
         commands = {
-            "apt": ["sudo", "apt-get", "install", "-y", "openssh-server"],
+            "apt": ["sudo", "apt-get", "update"],
             "dnf": ["sudo", "dnf", "install", "-y", "openssh-server"],
             "yum": ["sudo", "yum", "install", "-y", "openssh-server"],
-            "pacman": ["sudo", "pacman", "-S", "--noconfirm", "openssh"],
+            "pacman": ["sudo", "pacman", "-Sy", "--noconfirm", "openssh"],
             "zypper": ["sudo", "zypper", "install", "-y", "openssh"],
             "apk": ["sudo", "apk", "add", "openssh"],
-            "xbps": ["sudo", "xbps-install", "-y", "openssh"],
+            "xbps": ["sudo", "xbps-install", "-Sy", "openssh"],
             "eopkg": ["sudo", "eopkg", "install", "-y", "openssh"],
             "emerge": ["sudo", "emerge", "net-misc/openssh"],
             "nix": ["nix-env", "-iA", "nixpkgs.openssh"]
         }
 
-        cmd = commands.get(manager)
+        if manager == "apt":
+            if not Functions.executeCmd(commands["apt"]):
+                return
+            cmd = ["sudo", "apt-get", "install", "-y", "openssh-server"]
+        else:
+            cmd = commands.get(manager)
 
         if not cmd:
             print("Unsupported package manager.")

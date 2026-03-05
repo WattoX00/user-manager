@@ -48,6 +48,21 @@ class Functions():
 
     @staticmethod
     def executeCmd(cmd, check=True, capture=False):
+        try:
+            result = subprocess.run(
+                cmd,
+                check=check,
+                capture_output=capture,
+                text=True
+            )
+            if capture:
+                return result.stdout.strip()
+            return True
+        except subprocess.CalledProcessError:
+            return False
+
+    @staticmethod
+    def executeCmd(cmd, check=True, capture=False):
         import subprocess
 
         try:
