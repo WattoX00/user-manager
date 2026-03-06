@@ -85,6 +85,10 @@ SSH_COMMANDS = {
     "install": SSHFunctions.installOpenSSH,
     "enable": SSHFunctions.enableService,
     "genkey": SSHFunctions.generateKey,
+    "listkeys": SSHFunctions.listKeys,
+    "github": SSHFunctions.setupGithubSSH,
+    "test": SSHFunctions.testConnection,
+    "help": SSHFunctions.helptext,
     "setup": SSHFunctions.setup,
     "quit": quit,
 }
@@ -93,6 +97,10 @@ SSH_ALIASES = {
     "i": "install",
     "e": "enable",
     "gk": "genkey",
+    "lk": "listkeys",
+    "gh": "github",
+    "t": "test",
+    "h": "help",
     "s": "setup",
     "q": "quit",
 }
