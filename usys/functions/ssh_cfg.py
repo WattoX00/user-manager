@@ -1,6 +1,7 @@
 from .functions import Functions
 import os
 import shutil
+
 class SSHFunctions:
 
     @staticmethod
@@ -57,25 +58,24 @@ class SSHFunctions:
             print("Unsupported package manager.")
             return
 
-        result = Functions.executeCmd(cmd)
-
-        if result:
+        if Functions.executeCmd(cmd):
             print("OpenSSH installed successfully.")
 
     @staticmethod
     def enableService():
-        if Functions.executeCmd(["which", "systemctl"], check=False, capture=True):
+
+        if Functions.executeCmd(["which", "systemctl"], check=False):
             Functions.executeCmd(["sudo", "systemctl", "enable", "--now", "sshd"])
             print("SSH service enabled and started (systemd).")
             return
 
-        if Functions.executeCmd(["which", "rc-service"], check=False, capture=True):
+        if Functions.executeCmd(["which", "rc-service"], check=False):
             Functions.executeCmd(["sudo", "rc-update", "add", "sshd"])
             Functions.executeCmd(["sudo", "rc-service", "sshd", "start"])
             print("SSH service enabled and started (OpenRC).")
             return
 
-        if Functions.executeCmd(["which", "service"], check=False, capture=True):
+        if Functions.executeCmd(["which", "service"], check=False):
             Functions.executeCmd(["sudo", "service", "ssh", "start"])
             print("SSH service started (SysVinit).")
             return
@@ -94,12 +94,121 @@ class SSHFunctions:
         Functions.executeCmd(["sudo", "chmod", "700", ssh_dir])
         Functions.executeCmd(["sudo", "chown", f"{username}:{username}", ssh_dir])
 
-        cmd = ["sudo", "-u", username, "ssh-keygen", "-t", "ed25519", "-f", key_path, "-N"]
+        cmd = [
+            "sudo", "-u", username,
+            "ssh-keygen",
+            "-t", "ed25519",
+            "-f", key_path,
+            "-N", ""
+        ]
 
-        result = Functions.executeCmd(cmd)
-
-        if result:
+        if Functions.executeCmd(cmd):
             print(f"SSH key generated for user '{username}'.")
+
+    @staticmethod
+    def listKeys():
+
+        username = Functions.userName()
+        ssh_dir = f"/home/{username}/.ssh"
+
+        if not os.path.exists(ssh_dir):
+            print("No SSH directory found.")
+            return []
+
+        keys = []
+
+        for file in os.listdir(ssh_dir):
+            if file.endswith(".pub"):
+                keys.append(file.replace(".pub", ""))
+
+        if not keys:
+            print("No SSH keys found.")
+            return []
+
+        print("\nAvailable SSH keys:")
+        for i, key in enumerate(keys, 1):
+            print(f"{i}. {key}")
+
+        return keys
+
+    @staticmethod
+    def printPublicKey(username, key):
+
+        pub_path = f"/home/{username}/.ssh/{key}.pub"
+
+        if not os.path.exists(pub_path):
+            print("Public key not found.")
+            return
+
+        print("\nCopy this key to GitHub:\n")
+
+        with open(pub_path, "r") as f:
+            print(f.read())
+
+    @staticmethod
+    def setupGithubSSH():
+
+        username = Functions.userName()
+        ssh_dir = f"/home/{username}/.ssh"
+
+        if not os.path.exists(ssh_dir):
+            print("No SSH keys found. Generating one...")
+            SSHFunctions.generateKey()
+            return
+
+        keys = SSHFunctions.listKeys()
+
+        if not keys:
+            print("No keys found. Generating one...")
+            SSHFunctions.generateKey()
+            return
+
+        print("\nSelect a key or generate new:")
+        print("0. Generate new key")
+
+        try:
+            choice = int(input("Choice: "))
+        except:
+            print("Invalid choice.")
+            return
+
+        if choice == 0:
+            SSHFunctions.generateKey()
+            return
+
+        if 1 <= choice <= len(keys):
+            key = keys[choice - 1]
+            SSHFunctions.printPublicKey(username, key)
+            print("\nAdd it here:")
+            print("https://github.com/settings/keys")
+        else:
+            print("Invalid selection.")
+
+    @staticmethod
+    def testConnection():
+
+        print("Testing GitHub SSH connection...\n")
+
+        Functions.executeCmd([
+            "ssh",
+            "-T",
+            "git@github.com"
+        ], check=False)
+
+    @staticmethod
+    def helptext():
+
+        print("""
+SSH Command Help
+
+install        -> Install OpenSSH server
+enable         -> Enable and start SSH service
+generate-key   -> Generate new SSH key for a user
+list-keys      -> List existing SSH keys
+github         -> Setup GitHub SSH key
+test           -> Test SSH connection to GitHub
+help           -> Show this help message
+""")
 
     @staticmethod
     def setup():
