@@ -2,6 +2,7 @@ from .functions import HelpFunctions
 from .group_cfg import GroupFunctions
 from .user_cfg import UserFunctions
 from .ssh_cfg import SSHFunctions
+from .samba_cfg import SambaFunctions
 
 USER_COMMANDS = {
     "adduser": UserFunctions.userAdd,
@@ -105,6 +106,55 @@ SSH_ALIASES = {
     "q": "quit",
 }
 
+SAMBA_COMMANDS = {
+    "install": SambaFunctions.installSamba,
+    "start": SambaFunctions.startSamba,
+    "stop": SambaFunctions.stopSamba,
+    "enable": SambaFunctions.enableSamba,
+    "disable": SambaFunctions.disableSamba,
+    "restart": SambaFunctions.restartSamba,
+    "status": SambaFunctions.sambaStatus,
+    "adduser": SambaFunctions.addSambaUser,
+    "removeuser": SambaFunctions.removeSambaUser,
+    "enableuser": SambaFunctions.enableSambaUser,
+    "disableuser": SambaFunctions.disableSambaUser,
+    "mkshare": SambaFunctions.createShareFolder,
+    "rmshare": SambaFunctions.removeShareFolder,
+    "owner": SambaFunctions.setFolderOwner,
+    "chmod": SambaFunctions.setFolderPermissions,
+    "addconfig": SambaFunctions.addShareConfig,
+    "shares": SambaFunctions.listShares,
+    "testconf": SambaFunctions.testConfig,
+    "connections": SambaFunctions.listConnections,
+    "perms": SambaFunctions.folderPermissions,
+    "files": SambaFunctions.listSharedFiles,
+    "quit": quit,
+}
+
+SAMBA_ALIASES = {
+    "i": "install",
+    "st": "start",
+    "sp": "stop",
+    "e": "enable",
+    "d": "disable",
+    "r": "restart",
+    "s": "status",
+    "au": "adduser",
+    "ru": "removeuser",
+    "eu": "enableuser",
+    "du": "disableuser",
+    "ms": "mkshare",
+    "rs": "rmshare",
+    "o": "owner",
+    "c": "chmod",
+    "ac": "addconfig",
+    "ls": "shares",
+    "tc": "testconf",
+    "con": "connections",
+    "p": "perms",
+    "f": "files",
+    "q": "quit",
+}
 
 def root_help():
     print("""
