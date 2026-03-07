@@ -64,8 +64,7 @@ class SambaFunctions:
             return
 
         if Functions.executeCmd(cmd):
-            print("OpenSSH installed successfully.")
-
+            print("Samba installed successfully.")
 
     @staticmethod
     def startSamba():
@@ -105,14 +104,18 @@ class SambaFunctions:
             print(output)
 
     @staticmethod
-    def addSambaUser(username):
-        print(f"Adding samba user: {username}")
+    def addSambaUser():
+        username = Functions.userName()
+
         cmd = ["sudo", "smbpasswd", "-a", username]
         Functions.executeCmd(cmd, check=False)
 
     @staticmethod
-    def removeSambaUser(username):
+    def removeSambaUser():
+        username = Functions.userName()
+
         cmd = ["sudo", "smbpasswd", "-x", username]
+
         if Functions.executeCmd(cmd):
             print(f"Samba user '{username}' removed.")
 
@@ -129,7 +132,9 @@ class SambaFunctions:
             print(f"Samba user '{username}' disabled.")
 
     @staticmethod
-    def createShareFolder(folder):
+    def createShareFolder():
+        folder = input("Folder name: ").strip()
+
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
 
         if not os.path.exists(path):
@@ -175,7 +180,7 @@ class SambaFunctions:
             config += f"   valid users = {valid_users}\n"
 
         if valid_groups:
-            config += f"   valid users = @{valid_groups}\n"
+            config += f"   valid groups = {valid_groups}\n"
 
         try:
             with open("/tmp/samba_share.conf", "w") as f:
