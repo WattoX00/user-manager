@@ -244,5 +244,4 @@ def helpFull():
 
 # add flags
 
-# add apache setup
 # add errorhandling ; user permission managment ; foldere permissions
