@@ -3,6 +3,7 @@ from .group_cfg import GroupFunctions
 from .user_cfg import UserFunctions
 from .ssh_cfg import SSHFunctions
 from .samba_cfg import SambaFunctions
+from .apache_cfg import ApacheFunctions
 
 USER_COMMANDS = {
     "adduser": UserFunctions.userAdd,
@@ -204,8 +205,9 @@ def root_help():
 
     user        (u)     User management
     group       (g)     Group management
-    ssh         (ss)     SSH setup
+    ssh         (ss)    SSH setup
     samba       (sa)    Samba setup
+    apache      (a)     Apache setup
     help        (h)     Show this help menu
     exit        (q)     Exit the program
     """)

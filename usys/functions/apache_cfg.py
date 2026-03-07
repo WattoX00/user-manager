@@ -1,5 +1,7 @@
-from .Functions import Functions
+from .functions import Functions
 import shutil
+import os
+import platform
 
 class ApacheFunctions:
 
@@ -195,127 +197,159 @@ class ApacheFunctions:
             print("Apache additional packages installed successfully.")
 
     @staticmethod
+    def detectServiceAndTools():
+        distro = ""
+        try:
+            with open("/etc/os-release") as f:
+                lines = f.readlines()
+            for line in lines:
+                if line.startswith("ID="):
+                    distro = line.strip().split("=")[1].strip('"').lower()
+        except:
+            distro = platform.system().lower()
+
+        if distro in ["ubuntu", "debian"]:
+            service = "apache2"
+            config_test = "apache2ctl"
+            has_a2ensite = True
+        elif distro in ["arch", "manjaro"]:
+            service = "httpd"
+            config_test = "apachectl"
+            has_a2ensite = False
+        else:  # RHEL, Fedora, CentOS, Rocky, AlmaLinux, etc.
+            service = "httpd"
+            config_test = "httpd"
+            has_a2ensite = False
+
+        return service, config_test, has_a2ensite
+
+    @staticmethod
     def apacheStart():
-        cmd = ["sudo", "systemctl", "start", "apache2"]
+        service, _, _ = ApacheFunctions.detectServiceAndTools()
+        cmd = ["sudo", "systemctl", "start", service]
         if Functions.executeCmd(cmd):
-            print("Apache started.")
+            print(f"{service} started.")
 
     @staticmethod
     def apacheStop():
-        cmd = ["sudo", "systemctl", "stop", "apache2"]
+        service, _, _ = ApacheFunctions.detectServiceAndTools()
+        cmd = ["sudo", "systemctl", "stop", service]
         if Functions.executeCmd(cmd):
-            print("Apache stopped.")
+            print(f"{service} stopped.")
 
     @staticmethod
     def apacheRestart():
-        cmd = ["sudo", "systemctl", "restart", "apache2"]
+        service, _, _ = ApacheFunctions.detectServiceAndTools()
+        cmd = ["sudo", "systemctl", "restart", service]
         if Functions.executeCmd(cmd):
-            print("Apache restarted.")
+            print(f"{service} restarted.")
 
     @staticmethod
     def apacheStatus():
-        cmd = ["systemctl", "status", "apache2"]
+        service, _, _ = ApacheFunctions.detectServiceAndTools()
+        cmd = ["systemctl", "status", service]
         Functions.executeCmd(cmd, check=False)
 
     @staticmethod
     def apacheConfigTest():
-        cmd = ["sudo", "apache2ctl", "configtest"]
+        _, config_tool, _ = ApacheFunctions.detectServiceAndTools()
+        if config_tool in ["apache2ctl", "apachectl"]:
+            cmd = ["sudo", config_tool, "configtest"]
+        else:  # httpd
+            cmd = ["sudo", config_tool, "-t"]
         result = Functions.executeCmd(cmd, capture=True)
-
         if result:
             print(result.stdout)
 
     @staticmethod
     def apacheCreateTestSite():
-        import os
-
         site_name = input("Site name: ").strip().lower()
-
         if not site_name:
             print("Invalid site name.")
             return
 
         site_path = f"/var/www/{site_name}"
-
         if os.path.exists(site_path):
             print("Site already exists.")
             return
 
         Functions.executeCmd(["sudo", "mkdir", "-p", site_path])
-
         html = f"<h1>{site_name} works!</h1>"
-
         Functions.executeCmd([
             "sudo", "bash", "-c",
             f"echo '{html}' > {site_path}/index.html"
         ])
-
         print(f"Test site created at {site_path}")
 
     @staticmethod
     def apacheCreateVHost():
-        import os
-
         domain = input("Domain: ").strip().lower()
-
         if not domain:
             print("Invalid domain.")
             return
 
         docroot = f"/var/www/{domain}"
-
         config = f"""
-    <VirtualHost *:80>
-        ServerName {domain}
+<VirtualHost *:80>
+    ServerName {domain}
 
-        DocumentRoot {docroot}
+    DocumentRoot {docroot}
 
-        <Directory {docroot}>
-            AllowOverride All
-            Require all granted
-        </Directory>
+    <Directory {docroot}>
+        AllowOverride All
+        Require all granted
+    </Directory>
 
-        ErrorLog ${{APACHE_LOG_DIR}}/{domain}_error.log
-        CustomLog ${{APACHE_LOG_DIR}}/{domain}_access.log combined
-    </VirtualHost>
-    """
-
+    ErrorLog ${{APACHE_LOG_DIR}}/{domain}_error.log
+    CustomLog ${{APACHE_LOG_DIR}}/{domain}_access.log combined
+</VirtualHost>
+"""
         config_path = f"/etc/apache2/sites-available/{domain}.conf"
-
         Functions.executeCmd([
             "sudo", "bash", "-c",
             f"echo '{config}' > {config_path}"
         ])
-
         print(f"VirtualHost created: {config_path}")
 
     @staticmethod
     def apacheEnableSite():
+        _, _, has_a2ensite = ApacheFunctions.detectServiceAndTools()
+        if not has_a2ensite:
+            print("a2ensite not available on this distro. Enable site manually.")
+            return
         site = input("Site config name (example.conf): ").strip()
-
         cmd = ["sudo", "a2ensite", site]
-
         if Functions.executeCmd(cmd):
             print(f"Site '{site}' enabled.")
 
     @staticmethod
     def apacheDisableSite():
+        _, _, has_a2ensite = ApacheFunctions.detectServiceAndTools()
+        if not has_a2ensite:
+            print("a2dissite not available on this distro. Disable site manually.")
+            return
         site = input("Site config name: ").strip()
-
         cmd = ["sudo", "a2dissite", site]
-
         if Functions.executeCmd(cmd):
             print(f"Site '{site}' disabled.")
 
     @staticmethod
     def apacheAccessLog():
-        cmd = ["sudo", "tail", "-n", "50", "/var/log/apache2/access.log"]
-        Functions.executeCmd(cmd)
+        paths = ["/var/log/apache2/access.log", "/var/log/httpd/access_log"]
+        for path in paths:
+            if os.path.exists(path):
+                Functions.executeCmd(["sudo", "tail", "-n", "50", path])
+                return
+        print("Access log file not found.")
 
     @staticmethod
     def apacheErrorLog():
-        cmd = ["sudo", "tail", "-n", "50", "/var/log/apache2/error.log"]
-        Functions.executeCmd(cmd)
+        paths = ["/var/log/apache2/error.log", "/var/log/httpd/error_log"]
+        for path in paths:
+            if os.path.exists(path):
+                Functions.executeCmd(["sudo", "tail", "-n", "50", path])
+                return
+        print("Error log file not found.")
 
     @staticmethod
     def helptext():

@@ -1,6 +1,6 @@
 from .shell.shell import run_shell
 from .shell.dictcompleter import DictCompleter
-from .functions.commands import USER_COMMANDS, USER_ALIASES, GROUP_COMMANDS, GROUP_ALIASES, SSH_COMMANDS, SSH_ALIASES, SAMBA_COMMANDS, SAMBA_ALIASES, root_help, helpFull
+from .functions.commands import USER_COMMANDS, USER_ALIASES, GROUP_COMMANDS, GROUP_ALIASES, SSH_COMMANDS, SSH_ALIASES, SAMBA_COMMANDS, SAMBA_ALIASES, APACHE_COMMANDS, APACHE_ALIASES, root_help, helpFull
 from prompt_toolkit import PromptSession
 
 def main():
@@ -14,6 +14,7 @@ def main():
         "group",
         "ssh",
         "samba",
+        "apache",
     ]
 
     completer = DictCompleter({}, root_commands)
@@ -56,6 +57,10 @@ def main():
 
         if raw in ('samba', 'sa'):
             run_shell('usys samba ~ $ ', SAMBA_COMMANDS, SAMBA_ALIASES)
+            continue
+
+        if raw in ('apache', 'a'):
+            run_shell('usys apache ~ $ ', APACHE_COMMANDS, APACHE_ALIASES)
             continue
 
         print(f"{raw}: command not found")
