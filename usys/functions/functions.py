@@ -1,4 +1,6 @@
-from .shell.foldeercompleter import FolderCompleter
+from ..shell.foldercompleter import FolderCompleter
+
+
 class Functions():
 
     @staticmethod
