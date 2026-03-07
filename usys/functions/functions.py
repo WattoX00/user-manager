@@ -1,4 +1,3 @@
-from ..shell.foldercompleter import FolderCompleter
 
 class Functions():
 
@@ -79,7 +78,8 @@ class Functions():
 
     @staticmethod
     def folder(base_path=None, must_exist=True):
-
+        from ..shell.foldercompleter import FolderCompleter
+        import os
         while True:
 
             folder = FolderCompleter.folderPrompt(base_path)

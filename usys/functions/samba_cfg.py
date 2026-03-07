@@ -150,7 +150,7 @@ class SambaFunctions:
     @staticmethod
     def removeShareFolder():
 
-        folder = FolderFunctions.folder("/srv/samba")
+        folder = Functions.folder("/srv/samba")
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
 
         if os.path.exists(path):
@@ -159,7 +159,7 @@ class SambaFunctions:
 
     @staticmethod
     def setFolderOwner():
-        folder = input("Folder name: ").strip()
+        folder = Functions.folder()
         username = Functions.userName()
         groups = Functions.groupName()
 
@@ -257,20 +257,20 @@ class SambaFunctions:
 
     @staticmethod
     def folderPermissions():
-        folder = FolderFunctions.folder("/srv/samba")
+        folder = Functions.folder("/srv/samba")
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
 
-        cmd = ["ls", "-ld", path]
+        cmd = ["sudo", "ls", "-ld", path]
         output = Functions.executeCmd(cmd, capture=True)
         if output:
             print(output)
 
     @staticmethod
     def listSharedFiles():
-        folder = FolderFunctions.folder("/srv/samba")
+        folder = Functions.folder("/srv/samba")
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
 
-        cmd = ["ls", "-l", path]
+        cmd = ["sudo", "ls", "-l", path]
         output = Functions.executeCmd(cmd, capture=True)
         if output:
-            print(output)
+            print(output.stdout.strip())
