@@ -196,6 +196,11 @@ class SSHFunctions:
         ], check=False)
 
     @staticmethod
+    def setup():
+        SSHFunctions.installOpenSSH()
+        SSHFunctions.enableService()
+
+    @staticmethod
     def helptext():
         print("""
                    SSH MANAGEMENT
@@ -216,7 +221,3 @@ class SSHFunctions:
         quit            (q)     Quit the program
         """)
 
-    @staticmethod
-    def setup():
-        SSHFunctions.installOpenSSH()
-        SSHFunctions.enableService()

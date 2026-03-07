@@ -1,6 +1,6 @@
+from .functions import HelpFunctions
 from .group_cfg import GroupFunctions
 from .user_cfg import UserFunctions
-from .functions import HelpFunctions
 from .ssh_cfg import SSHFunctions
 
 USER_COMMANDS = {

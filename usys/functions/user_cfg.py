@@ -2,8 +2,6 @@ from .functions import Functions, HelpFunctions
 from datetime import datetime
 import os
 import pwd
-import grp
-import subprocess
 
 class UserFunctions:
 
