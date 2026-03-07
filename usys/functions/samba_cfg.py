@@ -148,7 +148,9 @@ class SambaFunctions:
             print("Folder already exists.")
 
     @staticmethod
-    def removeShareFolder(folder):
+    def removeShareFolder():
+
+        folder = FolderFunctions.folder("/srv/samba")
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
 
         if os.path.exists(path):
@@ -254,16 +256,20 @@ class SambaFunctions:
             print(output)
 
     @staticmethod
-    def folderPermissions(folder):
+    def folderPermissions():
+        folder = FolderFunctions.folder("/srv/samba")
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
+
         cmd = ["ls", "-ld", path]
         output = Functions.executeCmd(cmd, capture=True)
         if output:
             print(output)
 
     @staticmethod
-    def listSharedFiles(folder):
+    def listSharedFiles():
+        folder = FolderFunctions.folder("/srv/samba")
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
+
         cmd = ["ls", "-l", path]
         output = Functions.executeCmd(cmd, capture=True)
         if output:

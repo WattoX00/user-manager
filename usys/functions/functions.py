@@ -1,3 +1,4 @@
+from .shell.foldeercompleter import FolderCompleter
 class Functions():
 
     @staticmethod
@@ -62,33 +63,24 @@ class Functions():
             return False
 
     @staticmethod
-    def executeCmd(cmd, check=True, capture=False):
-        import subprocess
+    def folder(base_path=None, must_exist=True):
 
-        try:
-            result = subprocess.run(
-                cmd,
-                check=check,
-                capture_output=capture,
-                text=True
-            )
-            return result
+        while True:
 
-        except subprocess.CalledProcessError as e:
-            print(f"\n[COMMAND FAILED]")
-            print(f"Command: {' '.join(cmd)}")
-            print(f"Exit Code: {e.returncode}")
-            if e.stderr:
-                print(f"Error Output: {e.stderr.strip()}")
-            return None
+            folder = FolderCompleter.folderPrompt(base_path)
 
-        except FileNotFoundError:
-            print(f"\n[ERROR] Command not found: {cmd[0]}")
-            return None
+            if folder is None:
+                return None
 
-        except Exception as e:
-            print(f"\n[UNEXPECTED ERROR] {e}")
-            return None
+            if must_exist and not os.path.isdir(folder):
+                print("Folder does not exist.")
+                continue
+
+            if not must_exist and os.path.exists(folder):
+                print("Folder already exists.")
+                continue
+
+            return folder
 
 class HelpFunctions:
 

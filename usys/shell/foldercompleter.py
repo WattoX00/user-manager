@@ -2,7 +2,7 @@ import os
 from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import PathCompleter
 
-class PromptToolkitSession:
+class FolderCompleter:
 
     @staticmethod
     def folderPrompt(base_path=None):
