@@ -1,11 +1,16 @@
-
 class Functions():
 
     @staticmethod
     def userName(must_exist=True):
+        from .user_group_completer import PromptToolkitComplete
+        from prompt_toolkit import PromptSession
+
+        session = PromptSession(completer=PromptToolkitCompleter("users"))
+
         while True:
             HelpFunctions.listUsers()
-            username = input('User name: ').lower().strip()
+
+            username = session.prompt("User name: ").lower().strip()
 
             if not username:
                 print("Username cannot be empty.")
@@ -21,31 +26,41 @@ class Functions():
 
             return username
 
+
     @staticmethod
     def groupName(must_exist=True):
-        HelpFunctions.listGroups()
-        group_input = input('Group name(s) (comma separated): ').strip().lower()
+        from prompt_toolkit import PromptSession
+        from .user_group_completer import PromptToolkitCompleter
 
-        if not group_input:
-            return []
+        session = PromptSession(completer=PromptToolkitCompleter("groups"))
 
-        groups = [g.strip() for g in group_input.split(",") if g.strip()]
-        valid_groups = []
+        while True:
+            HelpFunctions.listGroups()
 
-        for g in groups:
-            exists = HelpFunctions.groupExists(g)
+            group_input = session.prompt(
+                "Group name(s) (comma separated): "
+            ).strip().lower()
 
-            if must_exist and not exists:
-                print(f"Group '{g}' does not exist.")
-                continue
+            if not group_input:
+                return []
 
-            if not must_exist and exists:
-                print(f"Group '{g}' already exists.")
-                continue
+            groups = [g.strip() for g in group_input.split(",") if g.strip()]
+            valid_groups = []
 
-            valid_groups.append(g)
+            for g in groups:
+                exists = HelpFunctions.groupExists(g)
 
-        return valid_groups
+                if must_exist and not exists:
+                    print(f"Group '{g}' does not exist.")
+                    continue
+
+                if not must_exist and exists:
+                    print(f"Group '{g}' already exists.")
+                    continue
+
+                valid_groups.append(g)
+
+            return valid_groups
 
     @staticmethod
     def executeCmd(cmd, check=True, capture=False):
