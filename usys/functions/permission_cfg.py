@@ -223,3 +223,30 @@ class PermissionFunctions():
         )
 
         print(f"Recursive group set to '{group}'.")
+
+    @staticmethod
+    def helptext():
+        print("""
+                PERMISSION MANAGEMENT
+        view            (v)     View file/folder permissions
+        chmod           (c)     Change permissions (chmod)
+        chown           (co)    Change owner
+        chgrp           (cg)    Change group
+
+                  ACL USER PERMISSIONS
+        adduser         (au)    Add ACL permission for user
+        rmuser          (ru)    Remove ACL permission for user
+
+                 ACL GROUP PERMISSIONS
+        addgroup        (ag)    Add ACL permission for group
+        rmgroup         (rg)    Remove ACL permission for group
+
+                 RECURSIVE PERMISSIONS
+        rchmod          (rc)    Recursively change permissions
+        rchown          (rco)   Recursively change owner
+        rchgrp          (rcg)   Recursively change group
+
+                    HELP & EXIT
+        help            (h)     Show this help text
+        quit            (q)     Quit the program
+        """)
