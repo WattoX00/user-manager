@@ -83,6 +83,36 @@ GROUP_ALIASES = {
     "q": "quit",
 }
 
+PERMISSION_COMMANDS = {
+    "view": PermissionFunctions.viewPermissions,
+    "chmod": PermissionFunctions.chmodPermissions,
+    "chown": PermissionFunctions.changeOwner,
+    "chgrp": PermissionFunctions.changeGroup,
+    "adduser": PermissionFunctions.addUserPermission,
+    "addgroup": PermissionFunctions.addGroupPermission,
+    "rmuser": PermissionFunctions.removeUserPermission,
+    "rmgroup": PermissionFunctions.removeGroupPermission,
+    "rchmod": PermissionFunctions.recursivePermissions,
+    "rchown": PermissionFunctions.recursiveOwner,
+    "rchgrp": PermissionFunctions.recursiveGroup,
+    "quit": quit,
+}
+
+PERMISSION_ALIASES = {
+    "v": "view",
+    "c": "chmod",
+    "co": "chown",
+    "cg": "chgrp",
+    "au": "adduser",
+    "ag": "addgroup",
+    "ru": "rmuser",
+    "rg": "rmgroup",
+    "rc": "rchmod",
+    "rco": "rchown",
+    "rcg": "rchgrp",
+    "q": "quit",
+}
+
 SSH_COMMANDS = {
     "install": SSHFunctions.installOpenSSH,
     "enable": SSHFunctions.enableService,
