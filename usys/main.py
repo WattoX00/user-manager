@@ -1,9 +1,43 @@
+# for flags
+import argparse
+from .flags.update import Update
+from .flags.verison import Version
+
+# for while loop inside usys executable
 from .shell.shell import run_shell
 from .shell.dictcompleter import DictCompleter
 from .functions.commands import USER_COMMANDS, USER_ALIASES, GROUP_COMMANDS, GROUP_ALIASES, PERMISSION_COMMANDS, PERMISSION_ALIASES, SSH_COMMANDS, SSH_ALIASES, SAMBA_COMMANDS, SAMBA_ALIASES, APACHE_COMMANDS, APACHE_ALIASES, root_help, helpFull
 from prompt_toolkit import PromptSession
 
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        prog="usys",
+        description=f"{TodolVersion.version()}\nLinux User Manager :)",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
+
+    info = parser.add_argument_group("Information")
+    info.add_argument("-u", "--update", action="store_true", help="Update todol with pipx")
+    info.add_argument("-v", "--version", action="store_true", help="Show version")
+
+    return parser.parse_args()
+
 def main():
+    # flag handling
+
+    args = parse_args()
+ 
+    if args.update:
+        Update.upgrade()
+        return
+
+    if args.version:
+        print(Version.version())
+        return
+
+    # main loop
+
     session = PromptSession()
 
     root_commands = [
