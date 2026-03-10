@@ -29,7 +29,7 @@ class Functions():
     @staticmethod
     def groupName(must_exist=True):
         from prompt_toolkit import PromptSession
-        from .shell.user_group_completer import UserGroupCompleter
+        from ..shell.user_group_completer import UserGroupCompleter
 
         session = PromptSession(completer=UserGroupCompleter("groups"))
 
