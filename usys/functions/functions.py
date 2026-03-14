@@ -5,7 +5,7 @@ class Functions():
         from prompt_toolkit import PromptSession
         from ..shell.user_group_completer import UserGroupCompleter
  
-        session = PromptSession(completer=UserGroupCompleter("users"))
+        session = PromptSession(completer=UserGroupCompleter("users"), reserve_space_for_menu=0)
 
         while True:
             HelpFunctions.listUsers()
@@ -31,7 +31,7 @@ class Functions():
         from prompt_toolkit import PromptSession
         from ..shell.user_group_completer import UserGroupCompleter
 
-        session = PromptSession(completer=UserGroupCompleter("groups"))
+        session = PromptSession(completer=UserGroupCompleter("groups"), reserve_space_for_menu=0)
 
         while True:
             HelpFunctions.listGroups()

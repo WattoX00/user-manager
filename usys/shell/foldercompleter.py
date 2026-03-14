@@ -6,7 +6,7 @@ class FolderCompleter:
 
     @staticmethod
     def folderPrompt(base_path=None):
-        session = PromptSession()
+        session = PromptSession(reserve_space_for_menu=0)
 
         completer = PathCompleter(
             only_directories=True,

@@ -57,6 +57,7 @@ def main():
         "apache",
     ]
 
+    session = PromptSession(reserve_space_for_menu=0)
     completer = DictCompleter({}, root_commands)
 
     while True:

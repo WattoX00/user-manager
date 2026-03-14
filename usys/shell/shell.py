@@ -3,7 +3,7 @@ from .dictcompleter import DictCompleter
 
 def run_shell(prompt, commands, aliases):
 
-    session = PromptSession()
+    session = PromptSession(reserve_space_for_menu=0)
 
     completer = DictCompleter(
         commands,
