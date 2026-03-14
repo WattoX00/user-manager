@@ -301,5 +301,7 @@ def helpFull():
     """)
 
 def greetText():
-    pass
+    # clear terminal on startup
+    from prompt_toolkit.shortcuts import clear
+    clear()
 
