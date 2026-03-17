@@ -4,6 +4,19 @@ USYS is a simple command-line Linux user and group management tool.
 It provides an interactive interface to manage users and groups using
 clear commands and short aliases.
 
+<details>
+<summary>📚 Contents</summary>
+  
+- [Installation](#installation)
+- [Features](#features)
+- [Disclaimer](#disclaimer)
+- [Usage](#usage)
+- [Command Guide](#commands)
+- [Support](#support)
+- [License](#license)
+
+</details>
+
 ## Features
 
 - Create, modify, and delete users
@@ -12,7 +25,7 @@ clear commands and short aliases.
 - View user and group information
 - Simple command aliases for faster usage
 
-Disclaimer:
+## Disclaimer:
 This program may not always work as intended. Use it at your own risk,
 especially in production environments or large projects.
 
@@ -22,12 +35,17 @@ may behave differently.
 Most operations require sudo permissions (except for listing functions),
 so make sure you understand what the program does before using it.
 
-Usage:
+## Usage:
 Navigate between shells using their commands. For example, type
 'user' or 'u' to enter the user shell mode. Inside each shell you can
 execute commands related to that category. Each shell also provides
 its own help functions.
 
+## Commands:
+<details>
+<summary>Click to open</summary>
+
+  
 ### 📦 Root Commands
 These commands switch you into dedicated management shells:
 
@@ -169,17 +187,18 @@ These commands switch you into dedicated management shells:
 | `hf`  | `helpf`      | Full help             |
 | `q`   | `quit`       | Exit shell            |
 
-Flags (run outside USYS):
+</details>
+
+## Flags (run outside USYS):
 usys --version     Show the installed version
 usys --update      Check for updates and install if available
-usys --helpf       Show this full help message
+usys --helpf       Show full help message
 
-Documentation and source code:
-https://github.com/WattoX00/usys
-https://pypi.org/project/usys/
+## Documentation and source code:
+[https://github.com/WattoX00/usys](https://github.com/WattoX00/usys)
+[https://pypi.org/project/usys/](https://pypi.org/project/usys/)
 
 If you encounter any issues, please report them here:
-https://github.com/WattoX00/usys/issues
+[https://github.com/WattoX00/usys/issues](https://github.com/WattoX00/usys/issues)
 
 Thank you for using USYS!
-
