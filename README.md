@@ -28,6 +28,9 @@ Navigate between shells using their commands. For example, type
 execute commands related to that category. Each shell also provides
 its own help functions.
 
+### 📦 Root Commands
+These commands switch you into dedicated management shells:
+
 | Alias | Command      | Description                       |
 | ----- | ------------ | --------------------------------- |
 | `u`   | `user`       | Enter user management shell       |
@@ -38,6 +41,8 @@ its own help functions.
 | `a`   | `apache`     | Enter Apache setup shell          |
 | `h`   | `help`       | Show root help menu               |
 | `q`   | `exit`       | Exit program                      |
+
+### 👤 User Commands
 
 | Alias | Command          | Description             |
 | ----- | ---------------- | ----------------------- |
@@ -65,6 +70,8 @@ its own help functions.
 | `hf`  | `helpf`          | Full help               |
 | `q`   | `quit`           | Exit shell              |
 
+### 👥 Group Commands
+
 | Alias | Command      | Description                |
 | ----- | ------------ | -------------------------- |
 | `ga`  | `addgroup`   | Create new group           |
@@ -77,6 +84,8 @@ its own help functions.
 | `h`   | `help`       | Help menu                  |
 | `hf`  | `helpf`      | Full help                  |
 | `q`   | `quit`       | Exit shell                 |
+
+### 🔐 Permission Commands
 
 | Alias | Command    | Description             |
 | ----- | ---------- | ----------------------- |
@@ -95,6 +104,7 @@ its own help functions.
 | `hf`  | `helpf`    | Full help               |
 | `q`   | `quit`     | Exit shell              |
 
+### 🔑 SSH Commands
 
 | Alias | Command    | Description         |
 | ----- | ---------- | ------------------- |
@@ -109,6 +119,7 @@ its own help functions.
 | `hf`  | `helpf`    | Full help           |
 | `q`   | `quit`     | Exit shell          |
 
+### 📁 Samba Commands
 
 | Alias | Command       | Description            |
 | ----- | ------------- | ---------------------- |
@@ -136,6 +147,8 @@ its own help functions.
 | `h`   | `help`        | Help menu              |
 | `hf`  | `helpf`       | Full help              |
 | `q`   | `quit`        | Exit shell             |
+
+### 🌐 Apache Commands
 
 | Alias | Command      | Description           |
 | ----- | ------------ | --------------------- |
