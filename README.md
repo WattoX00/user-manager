@@ -24,6 +24,15 @@ clear commands and short aliases.
 
 </details>
 
+## Installation
+
+```
+pip install usys
+```
+
+> [!IMPORTANT]
+> `usys` is a terminal application. I recommend installing it with `pipx`.
+
 ## Features
 
 - Create, modify, and delete users
