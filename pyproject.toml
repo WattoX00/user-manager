@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "usys"
-version = "0.1.3"
+version = "0.1.4"
 description = "Linux user manager"
 readme = "README.md"
 authors = [{ name="Wattox00"}]
