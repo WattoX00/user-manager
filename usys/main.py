@@ -75,7 +75,7 @@ def main():
             continue
 
         if raw in ('exit', 'q', 'e'):
-            break
+            exit()
 
         if raw in ('help', 'h'):
             root_help()
